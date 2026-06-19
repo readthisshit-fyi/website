@@ -1,0 +1,52 @@
+---
+import Navbar from '../components/nav.astro';
+
+import { Font } from 'astro:assets';
+
+import AppleTouchIcon from '../assets/favico/apple-touch-icon.png';
+import ThirtyTwoXIcon from '../assets/favico/favicon-32x32.png';
+import SixTeenXIcon from '../assets/favico/favicon-16x16.png';
+
+import '../style/colors.css';
+---
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="apple-touch-icon" sizes="180x180" href={AppleTouchIcon.src} />
+	<link rel="icon" type="image/png" sizes="32x32" href={ThirtyTwoXIcon.src} />
+	<link rel="icon" type="image/png" sizes="16x16" href={SixTeenXIcon.src} />
+
+	<Font cssVariable="--work-sans" />
+
+	<script is:inline>
+		document.documentElement.classList.add('no-transition');
+		document.documentElement.setAttribute('data-theme', localStorage.getItem('theme' ?? 'dark'));
+		requestAnimationFrame(() => {
+			document.documentElement.classList.remove('no-transition');
+		});
+	</script>
+
+	<title>readthisshit.fyi</title>
+</head>
+<body>
+	<Navbar />
+	<slot />
+</body>
+</html>
+
+<style>
+	body {
+		transition: background-color 0.1s ease, color 0.1s ease;
+
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+		margin: 0;
+		background: var(--background);
+
+		color: var(--text);
+		font-family: var(--work-sans);
+	}
+</style>

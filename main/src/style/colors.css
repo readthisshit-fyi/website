@@ -1,0 +1,15 @@
+:root {
+  --background: #131313;
+  --text: #faf3e3;
+  --primary: #ec534e;
+}
+
+[data-theme="light"] {
+  --background: #fefefe;
+  --text: #24313e;
+  --primary: #ec534e;
+}
+
+.no-transition * {
+  transition: none !important;
+}
