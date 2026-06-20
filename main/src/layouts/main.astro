@@ -1,5 +1,6 @@
 ---
 import Navbar from '../components/nav.astro';
+import Footer from '../components/footer.astro';
 
 import { Font } from 'astro:assets';
 
@@ -18,10 +19,13 @@ import '../style/colors.css';
 	<link rel="icon" type="image/png" sizes="32x32" href={ThirtyTwoXIcon.src} />
 	<link rel="icon" type="image/png" sizes="16x16" href={SixTeenXIcon.src} />
 
-	<Font cssVariable="--work-sans" />
+	<Font cssVariable="--work-sans" preload/>
 
 	<script is:inline>
 		document.documentElement.classList.add('no-transition');
+		if (Boolean(localStorage.getItem('theme')) == false) {
+			localStorage.setItem('theme', 'dark');
+		}
 		document.documentElement.setAttribute('data-theme', localStorage.getItem('theme' ?? 'dark'));
 		requestAnimationFrame(() => {
 			document.documentElement.classList.remove('no-transition');
@@ -32,7 +36,23 @@ import '../style/colors.css';
 </head>
 <body>
 	<Navbar />
-	<slot />
+	<div class="contentContainer">
+		<slot class="content"/>
+	</div>
+	<Footer />
+	<script>
+		import Lenis from 'lenis';
+
+		const lenis = new Lenis({
+			autoRaf: true,
+			duration: 0.3,
+			easing: (x) => 1 - Math.pow(1 - x, 4)
+		});
+
+		lenis.on('scroll', (e) => {
+			console.log(e);
+		});
+	</script>
 </body>
 </html>
 
@@ -48,5 +68,29 @@ import '../style/colors.css';
 
 		color: var(--text);
 		font-family: var(--work-sans);
+	}
+
+	.contentContainer {
+		justify-content: center;
+		display: flex;
+		flex-direction: column;
+		padding-bottom: 80px;
+	}
+</style>
+
+<style is:global>
+	::-webkit-scrollbar { width: 6px; }
+	::-webkit-scrollbar-track { background: #131313; }
+	::-webkit-scrollbar-thumb { 
+		background: #3a3a3a;
+		border-radius: 3px;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: #FAF3E3;
+	}
+
+	html { 
+		scrollbar-color: #3a3a3a #131313;
+		scrollbar-width: thin;
 	}
 </style>
