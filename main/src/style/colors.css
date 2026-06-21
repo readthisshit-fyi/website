@@ -164,7 +164,10 @@ a {
 
 :root {
   --background: #131313;
+  --background-hover: #232323;
   --text: #faf3e3;
+  --dimmed-text: #d7d1c4;
+  --dimmed-text-two: #b5b0a5;
   --primary: #ec534e;
 
   --max-width: 1400px;
@@ -173,7 +176,10 @@ a {
 
 [data-theme="light"] {
   --background: #fefefe;
+  --background-hover: #dfedfc;
   --text: #24313e;
+  --dimmed-text: #45505b;
+  --dimmed-text-two: #656f78;
   --primary: #ec534e;
 }
 

@@ -2,6 +2,7 @@
 import { defineConfig, fontProviders } from "astro/config";
 
 import vue from "@astrojs/vue";
+import svgLoader from "vite-svg-loader";
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,6 +15,7 @@ export default defineConfig({
     css: {
       transformer: "lightningcss",
     },
+    plugins: [svgLoader()],
   },
 
   fonts: [

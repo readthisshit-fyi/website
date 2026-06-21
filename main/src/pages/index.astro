@@ -1,6 +1,8 @@
 ---
 import MainLayout from '../layouts/main.astro';
 import '../style/colors.css';
+
+import TodaysPick from "../components/todaysPick.vue";
 ---
 <MainLayout>
 	<section class="welcomer">
@@ -10,12 +12,12 @@ import '../style/colors.css';
 	<section class="todaysPicks">
 		<h1>Today's stuff</h1>
 		<div class="pickGrid">
-			<div class="todaysPick"></div>
-			<div class="todaysPick"></div>
-			<div class="todaysPick"></div>
-			<div class="todaysPick"></div>
-			<div class="todaysPick"></div>
-			<div class="todaysPick"></div>
+			<TodaysPick></TodaysPick>
+			<TodaysPick></TodaysPick>
+			<TodaysPick></TodaysPick>
+			<TodaysPick></TodaysPick>
+			<TodaysPick></TodaysPick>
+			<TodaysPick></TodaysPick>
 		</div>
 	</section>
 </MainLayout>
@@ -92,20 +94,6 @@ import '../style/colors.css';
 			background: var(--text);
 
 			overflow: hidden;
-
-			.todaysPick {
-				display: flex;
-				padding: 15px;
-				flex-direction: column;
-				justify-content: space-between;
-				align-items: flex-start;
-				align-self: stretch;
-				grid-row: span 1;
-				grid-column: span 1;
-				justify-self: stretch;
-
-				background: var(--background);
-			}
 		}
 	}
 </style>
