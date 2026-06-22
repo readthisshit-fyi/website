@@ -1,29 +1,46 @@
+<script>
+const todaysWebsites = await fetch("http://localhost:3000/todayspicks").then((res) => res.json());
+</script>
+
 <script setup>
+import { ref } from "vue";
 import FishIcon from "../assets/fshhhhh.svg?component";
 import StarIcon from "../assets/star.svg?component";
+
+const props = defineProps(["num"]);
+
+const card = todaysWebsites[Number(props.num) - 1];
+
+const cardTitle = ref(card["websiteTitle"]);
+const cardDesc = ref(card["websiteDesc"]);
+const cardURL = ref(card["websiteURL"]);
+const cardCat = ref(card["websiteCategory"]);
+const cardFishCount = ref(card["fishCount"]);
+const cardRating = ref(card["rating"]);
+
+console.log(cardTitle);
 </script>
 
 <template>
   <div class="card">
     <div>
-      <p class="cardTitle">Privacy Guides</p>
+      <p class="cardTitle">{{ cardTitle }}</p>
       <p class="cardDescription">
-        Established in 2021, Privacy Guides is the most popular & trustworthy non-profit resource to find privacy tools and learn about
-        protecting your digital life.
+        {{ cardDesc }}
       </p>
     </div>
     <hr />
     <div class="cardRow additionalInfo">
-      <p class="cardUrl">privacyguides.org</p>
-      <p class="cardCategory">Software</p>
+      <p class="cardUrl">{{ cardURL }}</p>
+      <p class="cardCategory">{{ cardCat }}</p>
     </div>
     <div class="cardRow">
       <div class="fishCounter">
-        <p>10k</p>
+        <p>{{ cardFishCount }}</p>
         <FishIcon />
       </div>
       <div class="ratingContainer">
-        <div class="stars" :style="{ '--fill': (rating / 5) * 100 + '%' }">
+        <div class="stars" :style="{ '--fill': (cardRating / 5) * 100 + '%' }">
           <div class="stars-bg">
             <StarIcon v-for="i in 5" :key="i" />
           </div>
@@ -31,7 +48,7 @@ import StarIcon from "../assets/star.svg?component";
             <StarIcon v-for="i in 5" :key="i" />
           </div>
         </div>
-        <p class="rating">4.9/5</p>
+        <p class="rating">{{ cardRating }}/5</p>
       </div>
     </div>
   </div>
