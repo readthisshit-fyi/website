@@ -1,5 +1,6 @@
 <script setup>
 import FishIcon from "../assets/fshhhhh.svg?component";
+import StarIcon from "../assets/star.svg?component";
 </script>
 
 <template>
@@ -22,7 +23,14 @@ import FishIcon from "../assets/fshhhhh.svg?component";
         <FishIcon />
       </div>
       <div class="ratingContainer">
-        <div class="stars"></div>
+        <div class="stars" :style="{ '--fill': (rating / 5) * 100 + '%' }">
+          <div class="stars-bg">
+            <StarIcon v-for="i in 5" :key="i" />
+          </div>
+          <div class="stars-fill">
+            <StarIcon v-for="i in 5" :key="i" />
+          </div>
+        </div>
         <p class="rating">4.9/5</p>
       </div>
     </div>
@@ -106,12 +114,58 @@ import FishIcon from "../assets/fshhhhh.svg?component";
   }
 
   .ratingContainer {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    align-self: stretch;
+
     .rating {
       color: var(--text);
       font-size: 20px;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
+    }
+
+    .stars {
+      position: relative;
+      display: inline-flex;
+
+      .stars-bg,
+      .stars-fill {
+        display: flex;
+        align-items: center;
+
+        svg {
+          width: 26px;
+          height: 26px;
+          margin-left: -12px;
+          flex-shrink: 0;
+
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+      }
+
+      .stars-bg {
+        svg {
+          color: var(--dimmed-text-two);
+        }
+      }
+
+      .stars-fill {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: var(--fill);
+        overflow: hidden;
+
+        svg {
+          color: var(--text);
+          filter: drop-shadow(-3px 0px 2px rgba(0, 0, 0, 0.3));
+        }
+      }
     }
   }
 
@@ -123,19 +177,20 @@ import FishIcon from "../assets/fshhhhh.svg?component";
     justify-content: start;
     align-items: center;
     gap: 5px;
+    font-size: 20px;
 
     p {
       color: var(--text);
-      font-size: 20px;
       font-style: normal;
       font-weight: 400;
-      line-height: normal;
+      line-height: 1;
     }
 
     svg {
       height: 100%;
-      align-self: stretch;
       aspect-ratio: 1/1;
+      height: 1em;
+      width: auto !important;
     }
   }
 }
