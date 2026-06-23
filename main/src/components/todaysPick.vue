@@ -17,8 +17,6 @@ const cardURL = ref(card["websiteURL"]);
 const cardCat = ref(card["websiteCategory"]);
 const cardFishCount = ref(card["fishCount"]);
 const cardRating = ref(card["rating"]);
-
-console.log(cardTitle);
 </script>
 
 <template>

@@ -165,6 +165,10 @@ a {
 :root {
   --background: #131313;
   --background-hover: #232323;
+
+  --loading-background-1: linear-gradient(#131313, #faf3e3);
+  --loading-background-2: linear-gradient(#faf3e3, #131313);
+
   --text: #faf3e3;
   --dimmed-text: #d7d1c4;
   --dimmed-text-two: #b5b0a5;
