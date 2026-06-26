@@ -14,6 +14,7 @@
   "dependencies": {
     "@astrojs/vue": "^6.0.1",
     "astro": "^6.4.7",
+    "embla-carousel-vue": "9.0.0-rc02",
     "lenis": "^1.3.23",
     "lightningcss": "^1.32.0",
     "sass": "^1.101.0",

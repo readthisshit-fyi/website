@@ -45,13 +45,12 @@ import '../style/colors.css';
 
 		const lenis = new Lenis({
 			autoRaf: true,
-			duration: 0.3,
-			easing: (x) => 1 - Math.pow(1 - x, 4)
+			duration: 0.4,
+			easing: (x) => 1 - Math.pow(1 - x, 4),
+  		allowNestedScroll: true,
 		});
 
-		lenis.on('scroll', (e) => {
-			console.log(e);
-		});
+		window.__lenis = lenis;
 	</script>
 </body>
 </html>
@@ -79,18 +78,24 @@ import '../style/colors.css';
 </style>
 
 <style is:global>
-	::-webkit-scrollbar { width: 6px; }
-	::-webkit-scrollbar-track { background: #131313; }
-	::-webkit-scrollbar-thumb { 
-		background: #3a3a3a;
-		border-radius: 3px;
-	}
-	::-webkit-scrollbar-thumb:hover {
-		background: #FAF3E3;
-	}
+/* Chrome/Edge/Safari */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent; /* removes the ugly bg */
+}
+::-webkit-scrollbar-button {
+  display: none; /* kills the arrows */
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25); /* semi-transparent thumb */
+  border-radius: 99px;
+}
 
-	html { 
-		scrollbar-color: #3a3a3a #131313;
-		scrollbar-width: thin;
-	}
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
 </style>
