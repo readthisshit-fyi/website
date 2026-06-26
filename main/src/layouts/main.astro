@@ -1,101 +1,104 @@
 ---
-import Navbar from '../components/nav.astro';
-import Footer from '../components/footer.astro';
+import Navbar from "../components/nav.astro";
+import Footer from "../components/footer.astro";
 
-import { Font } from 'astro:assets';
+import { Font } from "astro:assets";
 
-import AppleTouchIcon from '../assets/favico/apple-touch-icon.png';
-import ThirtyTwoXIcon from '../assets/favico/favicon-32x32.png';
-import SixTeenXIcon from '../assets/favico/favicon-16x16.png';
+import AppleTouchIcon from "../assets/favico/apple-touch-icon.png";
+import ThirtyTwoXIcon from "../assets/favico/favicon-32x32.png";
+import SixTeenXIcon from "../assets/favico/favicon-16x16.png";
 
-import '../style/colors.css';
+import "../style/colors.css";
 ---
+
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	<link rel="apple-touch-icon" sizes="180x180" href={AppleTouchIcon.src} />
-	<link rel="icon" type="image/png" sizes="32x32" href={ThirtyTwoXIcon.src} />
-	<link rel="icon" type="image/png" sizes="16x16" href={SixTeenXIcon.src} />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<Font cssVariable="--work-sans" preload/>
+    <link rel="apple-touch-icon" sizes="180x180" href={AppleTouchIcon.src} />
+    <link rel="icon" type="image/png" sizes="32x32" href={ThirtyTwoXIcon.src} />
+    <link rel="icon" type="image/png" sizes="16x16" href={SixTeenXIcon.src} />
 
-	<script is:inline>
-		document.documentElement.classList.add('no-transition');
-		if (Boolean(localStorage.getItem('theme')) == false) {
-			localStorage.setItem('theme', 'dark');
-		}
-		document.documentElement.setAttribute('data-theme', localStorage.getItem('theme' ?? 'dark'));
-		requestAnimationFrame(() => {
-			document.documentElement.classList.remove('no-transition');
-		});
-	</script>
+    <Font cssVariable="--work-sans" preload />
 
-	<title>readthisshit.fyi</title>
-</head>
-<body>
-	<Navbar />
-	<div class="contentContainer">
-		<slot class="content"/>
-	</div>
-	<Footer />
-	<script>
-		import Lenis from 'lenis';
+    <script is:inline>
+      document.documentElement.classList.add("no-transition");
+      if (Boolean(localStorage.getItem("theme")) == false) {
+        localStorage.setItem("theme", "dark");
+      }
+      document.documentElement.setAttribute("data-theme", localStorage.getItem("theme" ?? "dark"));
+      requestAnimationFrame(() => {
+        document.documentElement.classList.remove("no-transition");
+      });
+    </script>
 
-		const lenis = new Lenis({
-			autoRaf: true,
-			duration: 0.4,
-			easing: (x) => 1 - Math.pow(1 - x, 4),
-  		allowNestedScroll: true,
-		});
+    <title>readthisshit.fyi</title>
+  </head>
+  <body>
+    <Navbar />
+    <div class="contentContainer">
+      <slot class="content" />
+    </div>
+    <Footer />
+    <script>
+      import Lenis from "lenis";
 
-		window.__lenis = lenis;
-	</script>
-</body>
+      const lenis = new Lenis({
+        autoRaf: true,
+        duration: 0.4,
+        easing: (x) => 1 - Math.pow(1 - x, 4),
+        allowNestedScroll: true,
+      });
+
+      window.__lenis = lenis;
+    </script>
+  </body>
 </html>
 
 <style>
-	body {
-		transition: background-color 0.1s ease, color 0.1s ease;
+  body {
+    transition:
+      background-color 0.1s ease,
+      color 0.1s ease;
 
-		display: flex;
-		flex-direction: column;
-		padding: 0;
-		margin: 0;
-		background: var(--background);
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    background: var(--background);
 
-		color: var(--text);
-		font-family: var(--work-sans);
-	}
+    color: var(--text);
+    font-family: var(--work-sans);
+  }
 
-	.contentContainer {
-		justify-content: center;
-		display: flex;
-		flex-direction: column;
-		padding-bottom: 80px;
-	}
+  .contentContainer {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 80px;
+  }
 </style>
 
 <style is:global>
-/* Chrome/Edge/Safari */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent; /* removes the ugly bg */
-}
-::-webkit-scrollbar-button {
-  display: none; /* kills the arrows */
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.25); /* semi-transparent thumb */
-  border-radius: 99px;
-}
+  /* Chrome/Edge/Safari */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent; /* removes the ugly bg */
+  }
+  ::-webkit-scrollbar-button {
+    display: none; /* kills the arrows */
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.25); /* semi-transparent thumb */
+    border-radius: 99px;
+  }
 
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
-}
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+  }
 </style>

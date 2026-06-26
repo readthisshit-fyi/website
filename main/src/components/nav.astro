@@ -1,51 +1,52 @@
 ---
-import SvgLogo from '../assets/logo-alpha.svg';
-import '../style/colors.css';
+import SvgLogo from "../assets/logo-alpha.svg";
 
-import MoonIcon from '../assets/icons/moon.svg';
-import SunIcon from '../assets/icons/sun.svg';
+import MoonIcon from "../assets/icons/moon.svg";
+import SunIcon from "../assets/icons/sun.svg";
 ---
 
 <nav>
-	<div class="navContainer">
-		<SvgLogo class="logo" />
-		<ul class="navLinks">
-			<li><a href="" class="navLink">Homepage</a></li>
-			<li><a href="" class="navLink">Featured</a></li>
-			<li><a href="" class="navLink">All Articles</a></li>
-			<li><a href="" class="navLink">Contributte</a></li>
-		</ul>
-		<div class="buttonAndAccountContainer">
-			<button class="themeSwitcher" id="themeButton">
-				<MoonIcon class="moon"/>
-				<SunIcon class="sun" />
-			</button>
-			<script>
-				const themeButton = document.getElementById("themeButton");
+  <div class="navContainer">
+    <SvgLogo class="logo" />
+    <ul class="navLinks">
+      <li><a href="" class="navLink">Homepage</a></li>
+      <li><a href="" class="navLink">Featured</a></li>
+      <li><a href="" class="navLink">All Articles</a></li>
+      <li><a href="" class="navLink">Contributte</a></li>
+    </ul>
+    <div class="buttonAndAccountContainer">
+      <button class="themeSwitcher" id="themeButton">
+        <MoonIcon class="moon" />
+        <SunIcon class="sun" />
+      </button>
+      <script>
+        const themeButton = document.getElementById("themeButton");
 
-				themeButton?.addEventListener('click', (e) => {
-					const current = document.documentElement.getAttribute('data-theme');
-					const next = current === 'dark' ? 'light' : 'dark';
+        themeButton?.addEventListener("click", (e) => {
+          const current = document.documentElement.getAttribute("data-theme");
+          const next = current === "dark" ? "light" : "dark";
 
-					document.documentElement.setAttribute('data-theme', next);
-					localStorage.setItem('theme', next);
-				})
-			</script>
-		</div>
-	</div>
+          document.documentElement.setAttribute("data-theme", next);
+          localStorage.setItem("theme", next);
+        });
+      </script>
+    </div>
+  </div>
 </nav>
 
 <style lang="scss">
-	:global([data-theme="dark"]) .sun {
-		display: none;
-	}
+  :global([data-theme="dark"]) .sun {
+    display: none;
+  }
 
-	:global([data-theme="light"]) .moon {
-		display: none;
-	}
+  :global([data-theme="light"]) .moon {
+    display: none;
+  }
 
   nav {
-    transition: background-color 0.1s ease, border-color 0.1s ease;
+    transition:
+      background-color 0.1s ease,
+      border-color 0.1s ease;
     border-bottom: 3px solid var(--text);
     background: var(--background);
     width: 100%;

@@ -3,7 +3,7 @@ const todaysWebsites = await fetch("http://localhost:3000/todayspicks").then((re
 </script>
 
 <script setup>
-import { onMounted, ref, watch } from "vue";
+import { ref, watch } from "vue";
 import FishIcon from "../assets/fshhhhh.svg?component";
 import RatingStars from "./ratingStars.vue";
 import EmblaCarousel from "./emblaCarousel.vue";
