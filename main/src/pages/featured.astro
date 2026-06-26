@@ -1,0 +1,59 @@
+---
+import MainLayout from "../layouts/main.astro";
+import TodaysPick from "../components/todaysPick.vue";
+import FeaturedPicks from "../components/featured.vue";
+---
+
+<MainLayout class="contentContainer">
+  <section class="titlesNStuff">
+    <h1>Articles and links that people like the most :O</h1>
+    <!-- <h2>
+      This page is resetted weekly, so don't forget to click the fish icon under your favorite website when you visit it ;)<br />
+      <br />You can vote daily on your favorite websites to boost them in this list!
+    </h2> -->
+  </section>
+
+  <FeaturedPicks client:only />
+</MainLayout>
+
+<style lang="scss">
+  .contentContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--max-content-width);
+    align-self: center;
+  }
+
+  .titlesNStuff {
+    display: flex;
+    height: auto;
+    padding: 70px 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+
+    h1 {
+      color: var(--text);
+      font-size: 64px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+
+    h2 {
+      color: var(--text);
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+  }
+</style>
