@@ -7,7 +7,7 @@ import SunIcon from "../assets/icons/sun.svg";
 
 <nav>
   <div class="navContainer">
-    <SvgLogo class="logo" />
+    <a href="/"><SvgLogo class="logo" /></a>
     <ul class="navLinks">
       <li><a href="/" class="navLink">Homepage</a></li>
       <li><a href="/featured" class="navLink">Featured</a></li>
@@ -95,8 +95,7 @@ import SunIcon from "../assets/icons/sun.svg";
           }
         }
       }
-
-      .logo {
+      a {
         height: auto;
         width: auto;
         flex-shrink: 0;
@@ -104,6 +103,16 @@ import SunIcon from "../assets/icons/sun.svg";
         justify-self: start;
         overflow: hidden;
         display: block;
+
+        .logo {
+          height: auto;
+          width: auto;
+          flex-shrink: 0;
+          align-self: end;
+          justify-self: start;
+          overflow: hidden;
+          display: block;
+        }
       }
 
       .buttonAndAccountContainer {
