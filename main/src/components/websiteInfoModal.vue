@@ -106,7 +106,7 @@ onUnmounted(() => window.__lenis.start());
     cursor: auto;
 
     border-radius: 16px;
-    border: 2px solid rgba(250, 243, 227, 0.25);
+    border: 2px solid var(--dimmed-text-two);
     background: var(--background);
 
     .left {
@@ -140,7 +140,7 @@ onUnmounted(() => window.__lenis.start());
         }
 
         .desc {
-          color: rgba(250, 243, 227, 0.9);
+          color: var(--dimmed-text);
           font-size: 20px;
           font-style: normal;
           font-weight: 500;
@@ -148,7 +148,7 @@ onUnmounted(() => window.__lenis.start());
         }
 
         .creatorAndModerator {
-          color: rgba(250, 243, 227, 0.75);
+          color: var(--dimmed-text-two);
           font-size: 16px;
           font-style: normal;
           font-weight: 400;
@@ -197,7 +197,7 @@ onUnmounted(() => window.__lenis.start());
         align-self: stretch;
 
         border-radius: 31px;
-        background: rgba(250, 243, 227, 0.25);
+        background: var(--dimmed-text-two);
         border: 0;
       }
 
@@ -217,7 +217,7 @@ onUnmounted(() => window.__lenis.start());
         hr {
           height: 2px;
           width: 50%;
-          background: rgba(250, 243, 227, 0.25);
+          background: var(--dimmed-text-two);
           border: 0;
         }
 
@@ -238,15 +238,15 @@ onUnmounted(() => window.__lenis.start());
               color: var(--text);
               font-size: 20px;
               font-style: normal;
-              font-weight: 400;
+              font-weight: 500;
               line-height: normal;
             }
 
             .reviewTime {
-              color: rgba(250, 243, 227, 0.7);
+              color: var(--dimmed-text);
               font-size: 16px;
               font-style: normal;
-              font-weight: 400;
+              font-weight: 500;
               line-height: normal;
             }
           }
@@ -284,6 +284,7 @@ onUnmounted(() => window.__lenis.start());
           svg {
             height: 1.5em;
             width: auto;
+            color: var(--text);
           }
         }
 
@@ -305,13 +306,23 @@ onUnmounted(() => window.__lenis.start());
           width: 100%;
 
           border-radius: 6px;
-          border: 2px solid rgba(250, 243, 227, 0.5);
-          background: var(--Background, #131313);
-          transition: 0.1s ease border-color;
+          border: 2px solid var(--text);
+          background: var(--background);
+          transition: 0.1s ease all;
 
           &:hover {
-            border: 2px solid rgba(250, 243, 227, 0.75);
-            transition: 0.1s ease border-color;
+            p {
+              color: var(--background);
+            }
+
+            background: var(--text);
+            color: var(--background);
+            transition: 0.1s ease all;
+            border: 2px solid var(--dimmed-text);
+
+            svg {
+              color: var(--background);
+            }
           }
 
           p {
