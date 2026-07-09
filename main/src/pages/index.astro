@@ -1,15 +1,16 @@
 ---
 import MainLayout from "../layouts/main.astro";
 import TodaysPick from "../components/todaysPick.vue";
+import { m } from "../paraglide/messages.js";
 ---
 
 <MainLayout>
   <section class="welcomer">
-    <h1>A cat that brings useful articles instead of dead rats...</h1>
-    <input type="text" class="searchbar" placeholder="Search..." />
+    <h1>{m.homepage_title()}</h1>
+    <form action="/search" method="get"><input type="text" class="searchbar" placeholder={m.search()} name="q" /></form>
   </section>
   <section class="todaysPicks">
-    <h1>Today's stuff</h1>
+    <h1>{m.homepage_daily()}</h1>
     <div class="pickGrid">
       <TodaysPick num="1" client:only>
         <div slot="fallback" class="unloadedCard">
@@ -82,7 +83,7 @@ import TodaysPick from "../components/todaysPick.vue";
 
     h1 {
       color: var(--text);
-      font-size: 64px;
+      font-size: 52px;
       font-style: normal;
       font-weight: 700;
       line-height: normal;

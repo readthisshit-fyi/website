@@ -1,47 +1,45 @@
 ---
 import MainLayout from "../layouts/main.astro";
+
+import { m } from "../paraglide/messages.js";
 ---
 
 <MainLayout class="contentContainer">
   <section class="titlesNStuff">
-    <h1>Ways to contribute to the project</h1>
-    <!-- <h2>
-      This page is resetted weekly, so don't forget to click the fish icon under your favorite website when you visit it ;)<br />
-      <br />You can vote daily on your favorite websites to boost them in this list!
-    </h2> -->
+    <h1>{m.contribute_title()}</h1>
   </section>
   <section>
     <div class="subtitlesNStuff">
-      <h2>Suggest a website</h2>
-      <p>Found something worth reading? Send it below and let our mods check it out</p>
+      <h2>{m.contribute_suggestion_title()}</h2>
+      <p>{m.contribute_suggestion_subtitle()}</p>
     </div>
     <form action="/api/submitwebsite" method="post" class="websiteForm">
       <div class="inputField">
-        <label for="websiteUrl">Website Url</label>
-        <input type="text" name="websiteUrl" id="websiteUrl" placeholder="https://example.com" />
+        <label for="websiteUrl">{m.contribute_suggestion_form_websiteUrl()}</label>
+        <input type="text" name="websiteUrl" id="websiteUrl" placeholder={m.contribute_suggestion_form_websiteUrl_placeholder()} />
       </div>
       <div class="inputField">
-        <label for="reason">What's your opinion on the website?</label>
-        <textarea name="reason" rows="4" id="reason" placeholder="Well.. I think the website actually does a great job at..."></textarea>
+        <label for="reason">{m.contribute_suggestion_form_opinion()}</label>
+        <textarea name="reason" rows="4" id="reason" placeholder={m.contribute_suggestion_form_opinion_placeholder()}></textarea>
       </div>
-      <input type="submit" value="Submit" />
+      <input type="submit" value={m.contribute_suggestion_form_submit()} />
     </form>
   </section>
   <section>
     <div class="subtitlesNStuff">
-      <h2>Help translate the project</h2>
-      <p>The website is not in your language yet? Fix that on Crowdin! Future readers will thank you</p>
+      <h2>{m.contribute_translate_title()}</h2>
+      <p>{m.contribute_translate_subtitle()}</p>
     </div>
     <div>
-      <a href="https://crowdin.com">Open crowdin</a>
+      <a href="https://crowdin.com/project/readthisshit-fyi">{m.contribute_translate_link()}</a>
     </div>
   </section>
   <section>
     <div class="subtitlesNStuff">
-      <h2>Contribute to code</h2>
-      <p>Know Astro, Postgres, or Vue? The repo's open, the cat doesn't judge your commit history :^</p>
+      <h2>{m.contribute_code_title()}</h2>
+      <p>{m.contribute_code_subtitle()}</p>
     </div>
-    <div></div>
+    <a href="https://github.com/readthisshit-fyi">{m.contribute_code_link()}</a>
   </section>
 </MainLayout>
 
@@ -93,27 +91,29 @@ import MainLayout from "../layouts/main.astro";
           resize: none;
         }
       }
+    }
 
-      [type="submit"] {
-        width: auto;
-        display: flex;
-        flex-direction: column;
-        align-self: flex-start;
-        gap: 2px;
-        font-weight: 600;
-        font-size: 16px;
-        background: var(--background);
-        border: var(--text) 2px solid;
-        padding: 6px 12px;
-        border-radius: 4px;
-        color: var(--text);
-        transition: all 0.2s ease;
+    a,
+    [type="submit"],
+    button {
+      width: auto;
+      display: flex;
+      flex-direction: column;
+      align-self: flex-start;
+      gap: 2px;
+      font-weight: 600;
+      font-size: 16px;
+      background: var(--background);
+      border: var(--text) 2px solid;
+      padding: 6px 12px;
+      border-radius: 4px;
+      color: var(--text);
+      transition: all 0.2s ease;
 
-        &:hover {
-          background: var(--text);
-          color: var(--background);
-          transition: all 0.1s ease;
-        }
+      &:hover {
+        background: var(--text);
+        color: var(--background);
+        transition: all 0.1s ease;
       }
     }
   }
@@ -135,6 +135,7 @@ import MainLayout from "../layouts/main.astro";
   }
 
   p {
+    font-size: 18px;
     color: var(--dimmed-text);
   }
 

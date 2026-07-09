@@ -1,15 +1,13 @@
 ---
 import MainLayout from "../layouts/main.astro";
 import ArticleList from "../components/articleList.vue";
+
+import { m } from "../paraglide/messages.js";
 ---
 
 <MainLayout class="contentContainer">
   <section class="titlesNStuff">
-    <h1>All articles</h1>
-    <!-- <h2>
-      This page is resetted weekly, so don't forget to click the fish icon under your favorite website when you visit it ;)<br />
-      <br />You can vote daily on your favorite websites to boost them in this list!
-    </h2> -->
+    <h1>{m.all_articles_title()}</h1>
   </section>
   <ArticleList client:only />
 </MainLayout>

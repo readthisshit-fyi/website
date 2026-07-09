@@ -2,11 +2,13 @@
 import MainLayout from "../layouts/main.astro";
 import TodaysPick from "../components/todaysPick.vue";
 import FeaturedPicks from "../components/featured.vue";
+
+import { m } from "../paraglide/messages.js";
 ---
 
 <MainLayout class="contentContainer">
   <section class="titlesNStuff">
-    <h1>Articles and links that people like the most :O</h1>
+    <h1>{m.featured_title()}</h1>
     <!-- <h2>
       This page is resetted weekly, so don't forget to click the fish icon under your favorite website when you visit it ;)<br />
       <br />You can vote daily on your favorite websites to boost them in this list!
