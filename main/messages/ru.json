@@ -24,6 +24,7 @@
   "contribute_code_subtitle": "Знаете Astro, Postgres, или Vue? Репозиторий открыт для всех, кот не будет осуждать вашу историю коммитов :^",
   "contribute_code_link": "Открыть страницу Github",
   "websiteModal_communityReviews": "Отзывы сообщества",
-  "websiteModal_suggestedBy": "Предложено {name} на {date}",
+  "websiteModal_openWebsite": "Открыть сайт",
+  "websiteModal_suggestedBy": "Предложено {name} {date}",
   "websiteModal_approvedBy": "Одобрено {name} {date}"
 }

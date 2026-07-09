@@ -3,6 +3,8 @@ import { ref, onMounted, onUnmounted } from "vue";
 import FishIcon from "../assets/fshhhhh.svg?component";
 import RatingStars from "./ratingStars.vue";
 import EmblaCarousel from "./emblaCarousel.vue";
+import { m } from "../paraglide/messages.js";
+import { getLocale } from "../paraglide/runtime.js";
 
 const props = defineProps(["json"]);
 const card = props.json;
@@ -36,8 +38,8 @@ onUnmounted(() => window.__lenis.start());
             {{ cardDesc }}
           </p>
           <p class="creatorAndModerator">
-            Suggested by {{ creatorName }} on {{ creatorDate.toUTCString() }}<br />Approved by {{ moderatorName }} on
-            {{ moderatorDate.toUTCString() }}
+            {{ m.websiteModal_suggestedBy({ name: creatorName, date: creatorDate.toLocaleString(getLocale()) }) }}<br />
+            {{ m.websiteModal_approvedBy({ name: moderatorName, date: moderatorDate.toLocaleString(getLocale()) }) }}
           </p>
         </div>
         <!-- <div class="newsByTheWebsite">
@@ -46,7 +48,7 @@ onUnmounted(() => window.__lenis.start());
       </div>
       <div class="right">
         <div class="title">
-          <p>Community Reviews</p>
+          <p>{{ m.websiteModal_communityReviews() }}</p>
           <RatingStars :rating="cardRating"></RatingStars>
         </div>
         <hr />
@@ -54,7 +56,7 @@ onUnmounted(() => window.__lenis.start());
           <div v-for="review in card['reviews']" class="reviewContainer">
             <div class="reviewInfo">
               <p class="author">{{ review.author }}</p>
-              <p class="reviewTime">{{ new Date(review.date).toUTCString() }}</p>
+              <p class="reviewTime">{{ new Date(review.date).toLocaleString(getLocale()) }}</p>
               <RatingStars :rating="review.rating" class="reviewRating"></RatingStars>
             </div>
             <p class="reviewBody">{{ review.text }}</p>
@@ -63,7 +65,7 @@ onUnmounted(() => window.__lenis.start());
         </div>
         <div class="buttons">
           <button>
-            <p>Open Website</p>
+            <p>{{ m.websiteModal_openWebsite() }}</p>
           </button>
           <div class="lowerButtons">
             <button class="fish">

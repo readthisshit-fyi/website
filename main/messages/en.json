@@ -24,6 +24,7 @@
   "contribute_code_subtitle": "Know Astro, Postgres, or Vue? The repo's open, the cat doesn't judge your commit history :^",
   "contribute_code_link": "Open Github Page",
   "websiteModal_communityReviews": "Community Reviews",
+  "websiteModal_openWebsite": "Open website",
   "websiteModal_suggestedBy": "Suggested by {name} on {date}",
   "websiteModal_approvedBy": "Approved by {name} on {date}"
 }
