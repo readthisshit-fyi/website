@@ -121,7 +121,7 @@ const openImage = (src) => {
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: start;
+        justify-content: center;
         gap: 8px;
 
         padding: 10px 0;
