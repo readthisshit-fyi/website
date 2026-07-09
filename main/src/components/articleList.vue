@@ -12,7 +12,7 @@ const allArticles = await fetch("http://localhost:3000/articles").then((res) => 
   <div v-for="(category, index) in allArticles" class="category">
     <h2>{{ index }}</h2>
     <hr />
-    <Article v-for="article in category" :json="article" @changeModal="(x) => (currentModalJson = x)"></Article>
+    <Article v-for="article in category" :obj="article" @changeModal="(x) => (currentModalJson = x)"></Article>
   </div>
 
   <Teleport v-if="currentModalJson" to="body">

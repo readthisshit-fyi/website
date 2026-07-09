@@ -3,7 +3,11 @@ const featuredWebsites = await fetch("http://localhost:3000/featured").then((res
 </script>
 
 <script setup>
-import FeaturedPick from "./featuredPick.vue";
+import { ref } from "vue";
+import websiteCard from "./websiteCard.vue";
+import websiteInfoModal from "./websiteInfoModal.vue";
+
+let currentModalJson = ref(null);
 </script>
 
 <template>
@@ -11,10 +15,14 @@ import FeaturedPick from "./featuredPick.vue";
     <div v-for="(category, categoryName) in featuredWebsites" class="category">
       <h1>{{ String(categoryName) }}</h1>
       <div class="categoryGrid">
-        <FeaturedPick v-for="website in category" :json="JSON.stringify(website)" class="website" />
+        <websiteCard v-for="website in category" :obj="website" class="website" @changeModal="(x) => (currentModalJson = x)" />
       </div>
     </div>
   </section>
+
+  <Teleport v-if="currentModalJson" to="body">
+    <websiteInfoModal :json="currentModalJson" @closeModal="currentModalJson = null"></websiteInfoModal>
+  </Teleport>
 </template>
 
 <style lang="scss">

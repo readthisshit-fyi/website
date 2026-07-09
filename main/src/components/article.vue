@@ -1,7 +1,7 @@
 <script setup>
 import "../style/colors.css";
-const props = defineProps(["json"]);
-const cardObject = props.json;
+const props = defineProps(["obj"]);
+const cardObject = props.obj;
 </script>
 
 <template>
