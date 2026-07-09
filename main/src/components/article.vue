@@ -5,7 +5,7 @@ const cardObject = props.obj;
 </script>
 
 <template>
-  <div class="articleContainer" @click="$emit('changeModal', props.json)">
+  <div class="articleContainer" @click="$emit('changeModal', cardObject)">
     <p class="articleName">{{ cardObject["websiteTitle"] }}</p>
   </div>
 </template>
