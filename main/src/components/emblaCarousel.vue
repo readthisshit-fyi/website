@@ -105,7 +105,7 @@ const openImage = (src) => {
           max-width: 100%;
           max-height: 100%;
           object-fit: cover;
-          border-radius: 8px;
+          border-radius: 4px;
           border: 2px solid rgba(250, 243, 227, 0.25);
         }
       }
@@ -137,7 +137,7 @@ const openImage = (src) => {
             margin: 0;
             border: 3px solid transparent;
             transition: border-color 0.2s ease;
-            border-radius: 8px;
+            border-radius: 4px;
 
             cursor: pointer;
             &:hover {

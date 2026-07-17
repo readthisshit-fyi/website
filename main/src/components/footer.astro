@@ -4,7 +4,15 @@ import MouseSvg from "../assets/mouse.svg";
 
 <MouseSvg class="mouseSvg" />
 <div class="footer">
-  <div class="footerContainer"></div>
+  <div class="footerContainer">
+    <section>
+      <p>Legal stuff</p>
+      <a href="/legal/terms">Terms of Service</a>
+      <a href="/legal/privacy">Privacy Policy</a>
+      <a href="/legal/cookies">Cookies</a>
+      <a href="/legal/rules">Rules</a>
+    </section>
+  </div>
 </div>
 
 <style lang="scss">
@@ -16,7 +24,7 @@ import MouseSvg from "../assets/mouse.svg";
 
   .footer {
     width: 100%;
-    height: 300px;
+    height: auto;
     border-top: 3px solid var(--text);
 
     display: flex;
@@ -24,10 +32,39 @@ import MouseSvg from "../assets/mouse.svg";
     justify-content: center;
     align-items: end;
 
+    padding: 40px 0;
+
     .footerContainer {
       height: 100%;
       width: 100%;
       max-width: var(--max-width);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+
+      section {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        p {
+          border-bottom: 2px solid var(--text);
+          font-size: 24px;
+          font-weight: 600;
+          margin-bottom: 12px;
+        }
+
+        a {
+          border-bottom: 2px solid transparent;
+          transition: 0.05s ease all;
+
+          &:hover {
+            border-bottom: 2px solid var(--text);
+            transition: 0.05s ease all;
+          }
+        }
+      }
     }
   }
 </style>

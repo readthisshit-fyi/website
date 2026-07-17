@@ -26,5 +26,6 @@
   "websiteModal_communityReviews": "Community Reviews",
   "websiteModal_openWebsite": "Open website",
   "websiteModal_suggestedBy": "Suggested by {name} on {date}",
-  "websiteModal_approvedBy": "Approved by {name} on {date}"
+  "websiteModal_approvedBy": "Approved by {name} on {date}",
+  "login_title": "Login :^"
 }
