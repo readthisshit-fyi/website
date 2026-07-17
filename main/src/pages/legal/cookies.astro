@@ -1,0 +1,258 @@
+---
+import MainLayout from "../../layouts/main.astro";
+---
+
+<MainLayout class="contentContainer">
+  <article class="termsContent">
+    <section class="header">
+      <h1>Cookie Policy</h1>
+      <p class="lastUpdatedDate">Last updated: 17 July 2026</p>
+    </section>
+
+    <section class="termsBody">
+      <p>This Cookie Policy explains how readthisshit.fyi ("RTS", "we", "our", or "us") uses cookies and similar technologies.</p>
+      <p>
+        For more information about how we process personal information, please read our
+        <a href="/legal/privacy">Privacy Policy</a>.
+      </p>
+
+      <h2>1. What Are Cookies?</h2>
+      <p>Cookies are small text files stored on your device by your web browser.</p>
+      <p>They help websites remember information such as your login session, preferences, and privacy choices.</p>
+      <p>RTS only uses cookies that help provide and improve the Service.</p>
+
+      <h2>2. Cookies We Use</h2>
+
+      <h3>Essential Cookies</h3>
+      <p>Essential cookies are required for RTS to function correctly.</p>
+      <p>These cookies are used for:</p>
+      <ul>
+        <li>signing you in;</li>
+        <li>keeping you signed in;</li>
+        <li>protecting your account;</li>
+        <li>preventing abuse;</li>
+        <li>remembering your cookie preferences;</li>
+        <li>maintaining secure sessions.</li>
+      </ul>
+      <p>You cannot disable essential cookies while using RTS because the Service depends on them.</p>
+
+      <h3>Analytics Cookies</h3>
+      <p>Analytics cookies help us understand how people use RTS.</p>
+      <p>We use analytics to learn things such as:</p>
+      <ul>
+        <li>which pages are visited most often;</li>
+        <li>how users navigate the website;</li>
+        <li>which features are used;</li>
+        <li>where users encounter problems;</li>
+        <li>how we can improve usability and performance.</li>
+      </ul>
+      <p>Analytics are never used to sell your personal information or display personalized advertising.</p>
+      <p>Where required by law, analytics cookies are only used after you give your consent.</p>
+
+      <h2>3. Analytics</h2>
+      <p>RTS uses Umami Analytics.</p>
+      <p>Umami helps us understand how the website is used through information such as:</p>
+      <ul>
+        <li>page views;</li>
+        <li>button clicks;</li>
+        <li>navigation paths;</li>
+        <li>session recordings;</li>
+        <li>heatmaps;</li>
+        <li>feature usage;</li>
+        <li>A/B testing;</li>
+        <li>performance metrics.</li>
+      </ul>
+      <p>This information helps us improve RTS and fix problems.</p>
+
+      <h2>4. Managing Cookies</h2>
+      <p>When you first visit RTS, you will be asked whether you want to allow analytics cookies.</p>
+      <p>You can choose to:</p>
+      <ul>
+        <li>accept analytics cookies;</li>
+        <li>reject analytics cookies.</li>
+      </ul>
+      <p>Essential cookies remain enabled because they are required for the Service to function.</p>
+      <p>If cookie controls are available in your account settings, you can change your choice at any time.</p>
+      <p>You can also delete or block cookies through your web browser. Doing so may prevent some parts of RTS from working correctly.</p>
+
+      <h2>5. Third-Party Cookies</h2>
+      <p>Some third-party services used by RTS may place cookies on your device.</p>
+      <p>These services may include:</p>
+      <ul>
+        <li>Cloudflare;</li>
+        <li>Better Auth;</li>
+        <li>Umami Analytics.</li>
+      </ul>
+      <p>Each provider is responsible for its own privacy practices.</p>
+      <p>We recommend reviewing their privacy documentation if you would like more information.</p>
+
+      <h2>6. Changes to This Cookie Policy</h2>
+      <p>We may update this Cookie Policy from time to time.</p>
+      <p>When we do, we will update the "Last updated" date at the top of this page.</p>
+      <p>
+        If a change significantly affects how cookies are used, we will make reasonable efforts to notify registered users before the change
+        takes effect.
+      </p>
+
+      <h2>7. Contact</h2>
+      <p>If you have questions about this Cookie Policy, please contact us.</p>
+      <p>Email: <a href="mailto:mark@itsmark.dev">mark@itsmark.dev</a></p>
+      <p>
+        GitHub: <a href="https://github.com/readthisshit-fyi" target="_blank" rel="noopener noreferrer"
+          >https://github.com/readthisshit-fyi</a
+        >
+      </p>
+    </section>
+  </article>
+</MainLayout>
+
+<style lang="scss">
+  .contentContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .termsContent {
+    width: 100%;
+    max-width: var(--max-content-width);
+    padding: 0 20px;
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      height: auto;
+      padding: 70px 0;
+
+      h1 {
+        color: var(--text);
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        text-align: left;
+        width: 100%;
+        margin: 0 0 20px 0;
+      }
+
+      .lastUpdatedDate {
+        text-align: left;
+        width: 100%;
+        font-size: 14px;
+        color: var(--dimmed-text-two);
+        padding: 0;
+        margin: 0;
+      }
+    }
+
+    .termsBody {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-bottom: 100px;
+
+      p {
+        color: var(--text);
+        font-size: 16px;
+        line-height: 1.6;
+        margin: 0;
+
+        a {
+          color: var(--text);
+          text-decoration: underline;
+          transition: opacity 0.2s ease;
+
+          &:hover {
+            opacity: 0.7;
+          }
+        }
+      }
+
+      h2 {
+        color: var(--text);
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin: 0;
+        padding: 0 0 0 16px;
+        border-left: 4px solid var(--text);
+        opacity: 0.8;
+      }
+
+      h3 {
+        color: var(--text);
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin: 0;
+        padding: 0 0 0 12px;
+        border-left: 2px solid var(--text);
+        opacity: 0.8;
+      }
+
+      ul {
+        list-style: none;
+        padding-left: 20px;
+        margin: 0;
+
+        li {
+          color: var(--text);
+          font-size: 16px;
+          line-height: 1.6;
+          margin-bottom: 10px;
+          position: relative;
+          padding-left: 15px;
+
+          &::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .termsContent {
+      .header {
+        padding: 40px 0;
+
+        h1 {
+          font-size: 32px;
+        }
+
+        .lastUpdatedDate {
+          font-size: 12px;
+        }
+      }
+
+      .termsBody {
+        gap: 16px;
+        padding-bottom: 50px;
+
+        p {
+          font-size: 14px;
+        }
+
+        h2 {
+          font-size: 20px;
+        }
+
+        h3 {
+          font-size: 17px;
+        }
+
+        ul li {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+</style>
