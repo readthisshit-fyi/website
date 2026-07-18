@@ -1,0 +1,63 @@
+---
+import MainLayout from "../../layouts/main.astro";
+import LoginForm from "../../components/loginForm.vue";
+
+import { m } from "../../paraglide/messages.js";
+---
+
+<MainLayout class="contentContainer">
+  <section class="titlesNStuff">
+    <h1>{m.login_title()}</h1>
+  </section>
+  <section class="loginForm">
+    <LoginForm client:only />
+  </section>
+</MainLayout>
+
+<style lang="scss">
+  .contentContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--max-content-width);
+    align-self: center;
+  }
+
+  .loginForm {
+    justify-content: start;
+  }
+
+  .titlesNStuff {
+    display: flex;
+    height: auto;
+    padding: 70px 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+
+    h1 {
+      color: var(--text);
+      font-size: 48px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      text-align: left;
+      width: 100%;
+    }
+
+    h2 {
+      color: var(--text);
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+  }
+</style>

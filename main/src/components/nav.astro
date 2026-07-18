@@ -1,106 +1,42 @@
 ---
+import ThemeSwitcher from "./themeSwitcher.vue";
+import LanguageSwitcher from "./languageSwitcher.vue";
 import SvgLogo from "../assets/logo-alpha.svg";
 
-import MoonIcon from "../assets/icons/moon.svg";
-import SunIcon from "../assets/icons/sun.svg";
+import NavLoginRegister from "./navLoginRegister.vue";
 
 import { m } from "../paraglide/messages.js";
-import { getLocale, getTextDirection, setLocale, localizeHref, locales } from "../paraglide/runtime.js";
 
-import { Icon } from "astro-iconify";
+import { localizeHref } from "../paraglide/runtime.js";
+
+const { restrict } = Astro.props;
 ---
 
 <div class="navWrapper">
   <div class="navContainer">
-    <a href="/"><SvgLogo class="logo" /></a>
+    { restrict ? <a><SvgLogo class="logo" /></a> : <a href="/"><SvgLogo class="logo" /></a>}
     <div class="navLinks">
+      {
+      restrict ? null : 
+
       <a href={localizeHref("/")} class="navLink">{m.navbar_home()}</a>
       <a href={localizeHref("/featured")} class="navLink">{m.navbar_featured()}</a>
       <a href={localizeHref("/articles")} class="navLink">{m.navbar_allarticles()}</a>
       <a href={localizeHref("/contribute")} class="navLink">{m.navbar_contribute()}</a>
+      }
 
-      <div class="languagePickerWrapper">
-        <button class="languageButton" id="langButton">
-          <Icon name={`circle-flags:lang-${getLocale()}`} />
-        </button>
-
-        <div class="languagePicker" id="langPicker">
-          {
-            locales.map((locale) => (
-              <a href={localizeHref(Astro.url.pathname, { locale })} class="languageOption" data-locale={locale}>
-                <Icon name={`circle-flags:lang-${locale}`} />
-                <span>{locale.toUpperCase()}</span>
-              </a>
-            ))
-          }
-        </div>
+      <div class="buttons" transition:persist>
+        {restrict ? null : <NavLoginRegister client:load />}
+        <ThemeSwitcher client:only />
+        <LanguageSwitcher client:only />
       </div>
-
-      <script type="module">
-        import { setLocale } from "../paraglide/runtime.js";
-
-        const langButton = document.getElementById("langButton");
-        const langPicker = document.getElementById("langPicker");
-
-        langButton?.addEventListener("click", (e) => {
-          e.stopPropagation();
-          langPicker?.classList.toggle("open");
-        });
-
-        document.addEventListener("click", () => {
-          langPicker?.classList.remove("open");
-        });
-
-        document.querySelectorAll(".languageOption").forEach((el) => {
-          el.addEventListener("click", async (e) => {
-            e.preventDefault();
-
-            const locale = el.dataset.locale;
-            console.log("Clicked:", locale);
-
-            if (!locale) return;
-
-            await setLocale(locale, { reload: false });
-
-            console.log("After setLocale:", document.cookie);
-
-            const href = el.getAttribute("href");
-            if (href) {
-              window.location.assign(href);
-            }
-          });
-        });
-      </script>
-
-      <button class="themeSwitcher" id="themeButton">
-        <MoonIcon class="moon" />
-        <SunIcon class="sun" />
-      </button>
-      <script>
-        const themeButton = document.getElementById("themeButton");
-
-        themeButton?.addEventListener("click", (e) => {
-          const current = document.documentElement.getAttribute("data-theme");
-          const next = current === "dark" ? "light" : "dark";
-
-          document.documentElement.setAttribute("data-theme", next);
-          localStorage.setItem("theme", next);
-        });
-      </script>
     </div>
   </div>
 </div>
 
 <style lang="scss">
+  
   .hidden {
-    display: none;
-  }
-
-  :global([data-theme="dark"]) .sun {
-    display: none;
-  }
-
-  :global([data-theme="light"]) .moon {
     display: none;
   }
 
@@ -132,7 +68,7 @@ import { Icon } from "astro-iconify";
       .navLinks {
         display: flex;
         justify-content: flex-end;
-        gap: 40px;
+        gap: 32px;
         align-self: stretch;
         justify-self: end;
         flex-direction: row;
@@ -141,12 +77,13 @@ import { Icon } from "astro-iconify";
         margin: 0;
 
         .navLink {
-          font-size: 20px;
+          font-size: 18px;
           font-weight: 500;
           color: inherit;
           text-decoration: none;
           border-bottom: 0 solid var(--text);
           transition: border-bottom 0.05s ease-in-out;
+          align-self: center;
 
           &:hover {
             border-bottom: 2px solid var(--text);
@@ -158,112 +95,13 @@ import { Icon } from "astro-iconify";
           }
         }
 
-        .languageButton {
-          background: none;
+        .buttons {
           display: flex;
-          width: 34px;
-          height: 34px;
-          padding: 5px;
-          justify-content: center;
-          align-items: center;
-          border-radius: 7px;
-          outline: 2px solid var(--text);
-          aspect-ratio: 1/1;
-          flex-shrink: 0;
-          transition: 0.05s all linear;
-          border: 0;
-          color: var(--text);
-
-          font-weight: 500;
-
-          &:hover {
-            outline: 3px solid var(--text);
-            transition: 0.05s all linear;
-          }
-
-          svg {
-            border: 2px solid var(--text);
-            border-radius: 50%;
-          }
-        }
-
-        .languagePickerWrapper {
-          position: relative;
-          display: flex;
-          align-items: center;
-        }
-
-        .languagePicker {
-          position: absolute;
-          top: calc(100% + 8px);
-          right: 0;
-          display: none;
-          grid-template-columns: repeat(3, 1fr);
-          grid-auto-rows: auto;
-          gap: 4px;
-          padding: 8px;
-          background: var(--background);
-          border: 3px solid var(--text);
-          border-radius: 8px;
-          width: max-content;
-          z-index: 10;
-
-          &.open {
-            display: grid;
-          }
-
-          .languageOption {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            padding: 6px 8px;
-            border-radius: 6px;
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 16px;
-            transition: background 0.05s ease;
-
-            &:hover {
-              background: color-mix(in srgb, var(--text) 10%, transparent);
-            }
-
-            svg {
-              width: 24px;
-              height: 24px;
-              flex-shrink: 0;
-              border: 2px solid var(--text);
-              border-radius: 50%;
-            }
-          }
-        }
-
-        .themeSwitcher {
-          background: none;
-          display: flex;
-          width: 34px;
-          height: 34px;
-          padding: 5px;
-          justify-content: center;
-          align-items: center;
-          border-radius: 7px;
-          outline: 2px solid var(--text);
-          aspect-ratio: 1/1;
-          flex-shrink: 0;
-          transition: 0.05s all linear;
-          border: 0;
-
-          svg {
-            aspect-ratio: 1/1;
-          }
-
-          &:hover {
-            outline: 3px solid var(--text);
-            transition: 0.05s all linear;
-          }
+          gap: 12px;
+          flex-direction: row;
         }
       }
+
       a {
         height: auto;
         width: auto;

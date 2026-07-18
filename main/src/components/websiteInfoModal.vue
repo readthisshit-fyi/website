@@ -5,6 +5,7 @@ import RatingStars from "./ratingStars.vue";
 import EmblaCarousel from "./emblaCarousel.vue";
 import { m } from "../paraglide/messages.js";
 import { getLocale } from "../paraglide/runtime.js";
+import { authClient } from "./lib/auth-client";
 
 const props = defineProps(["json"]);
 const card = props.json;
@@ -21,8 +22,35 @@ const creatorDate = new Date(card["creator"].date);
 const moderatorName = card["moderator"].name;
 const moderatorDate = new Date(card["moderator"].date);
 
-onMounted(() => window.__lenis.stop());
+// Review form state
+const userAccount = ref(null);
+const reviewText = ref("");
+const reviewRating = ref(3);
+const isSubmittingReview = ref(false);
+
+onMounted(async () => {
+  window.__lenis.stop();
+  const session = await authClient.getSession();
+  userAccount.value = session;
+});
+
 onUnmounted(() => window.__lenis.start());
+
+async function submitReview() {
+  if (!reviewText.value.trim() || !userAccount.value) return;
+
+  isSubmittingReview.value = true;
+  try {
+    // TODO: Add API call to submit review
+    // await submitReviewAPI(card.id, reviewText.value, reviewRating.value);
+    reviewText.value = "";
+    reviewRating.value = 3;
+  } catch (error) {
+    console.error("Error submitting review:", error);
+  } finally {
+    isSubmittingReview.value = false;
+  }
+}
 </script>
 
 <template>
@@ -62,6 +90,49 @@ onUnmounted(() => window.__lenis.start());
             <p class="reviewBody">{{ review.text }}</p>
             <hr v-if="!(review === card['reviews'][card['reviews'].length - 1])" />
           </div>
+        </div>
+
+        <!-- Review Form - Only show if user is logged in -->
+        <div v-if="userAccount" class="reviewForm">
+          <hr />
+          <p class="formTitle">{{ m.websiteModal_writeReview?.() || "Write a Review" }}</p>
+
+          <div class="formGroup">
+            <label for="reviewRating">Rating:</label>
+            <div class="ratingSelector">
+              <button
+                v-for="star in 5"
+                :key="star"
+                :class="['starButton', { active: reviewRating >= star }]"
+                @click="reviewRating = star"
+                type="button"
+              >
+                ★
+              </button>
+              <span class="ratingValue">{{ reviewRating }}/5</span>
+            </div>
+          </div>
+
+          <div class="formGroup">
+            <label for="reviewText">Review:</label>
+            <textarea
+              id="reviewText"
+              v-model="reviewText"
+              placeholder="Share your thoughts about this website..."
+              class="reviewTextarea"
+              rows="4"
+            ></textarea>
+          </div>
+
+          <button class="submitButton" @click="submitReview" :disabled="!reviewText.trim() || isSubmittingReview">
+            {{ isSubmittingReview ? "Submitting..." : "Submit Review" }}
+          </button>
+        </div>
+
+        <!-- Login prompt - Show if user is NOT logged in -->
+        <div v-else class="loginPrompt">
+          <hr />
+          <p>{{ m.websiteModal_loginToReview?.() || "Log in to write a review" }}</p>
         </div>
         <div class="buttons">
           <button>
@@ -107,7 +178,7 @@ onUnmounted(() => window.__lenis.start());
 
     cursor: auto;
 
-    border-radius: 16px;
+    border-radius: 4px;
     border: 2px solid var(--dimmed-text-two);
     background: var(--background);
 
@@ -194,7 +265,7 @@ onUnmounted(() => window.__lenis.start());
       }
 
       hr {
-        height: 4px;
+        height: 2px;
         width: 100%;
         align-self: stretch;
 
@@ -270,7 +341,7 @@ onUnmounted(() => window.__lenis.start());
         width: 100%;
         height: auto;
         padding-top: 10px;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: flex-end;
         align-items: center;
         gap: 10px;
@@ -299,7 +370,7 @@ onUnmounted(() => window.__lenis.start());
 
         button {
           display: flex;
-          padding: 12px;
+          padding: 8px 16px;
           justify-content: center;
           align-items: center;
           gap: 10px;
@@ -307,7 +378,7 @@ onUnmounted(() => window.__lenis.start());
           flex-direction: row;
           width: 100%;
 
-          border-radius: 6px;
+          border-radius: 4px;
           border: 2px solid var(--text);
           background: var(--background);
           transition: 0.1s ease all;
@@ -334,6 +405,158 @@ onUnmounted(() => window.__lenis.start());
             font-weight: 500;
             line-height: normal;
           }
+        }
+      }
+
+      .reviewForm {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding-top: 16px;
+        align-self: stretch;
+
+        hr {
+          height: 2px;
+          width: 100%;
+          border-radius: 31px;
+          background: var(--dimmed-text-two);
+          border: 0;
+          margin: 0;
+        }
+
+        .formTitle {
+          color: var(--text);
+          font-size: 18px;
+          font-weight: 600;
+          margin: 0;
+        }
+
+        .formGroup {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          align-self: stretch;
+
+          label {
+            color: var(--text);
+            font-size: 16px;
+            font-weight: 500;
+          }
+
+          .ratingSelector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .starButton {
+              width: 32px;
+              height: 32px;
+              padding: 0;
+              border: 2px solid var(--dimmed-text-two);
+              background: var(--background);
+              border-radius: 4px;
+              color: var(--dimmed-text-two);
+              font-size: 18px;
+              cursor: pointer;
+              transition: all 0.2s ease;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              &.active {
+                color: var(--text);
+                border-color: var(--text);
+                background: var(--text);
+                color: var(--background);
+              }
+
+              &:hover {
+                border-color: var(--text);
+              }
+            }
+
+            .ratingValue {
+              color: var(--dimmed-text);
+              font-size: 16px;
+              margin-left: 8px;
+            }
+          }
+
+          .reviewTextarea {
+            width: 100%;
+            padding: 8px;
+            background: var(--background);
+            border: 2px solid var(--text);
+            border-radius: 4px;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 80px;
+            transition: all 0.2s ease;
+
+            &:focus {
+              border-color: var(--text);
+              background: var(--background);
+            }
+
+            &::placeholder {
+              color: var(--dimmed-text);
+            }
+          }
+        }
+
+        .submitButton {
+          display: flex;
+          padding: 8px 16px;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+          align-self: flex-start;
+          width: auto;
+
+          border-radius: 4px;
+          border: 2px solid var(--text);
+          background: var(--background);
+          color: var(--text);
+          font-size: 16px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          &:hover:not(:disabled) {
+            background: var(--text);
+            color: var(--background);
+          }
+
+          &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+        }
+      }
+
+      .loginPrompt {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding-top: 16px;
+        align-self: stretch;
+
+        hr {
+          height: 2px;
+          width: 100%;
+          border-radius: 31px;
+          background: var(--dimmed-text-two);
+          border: 0;
+          margin: 0;
+        }
+
+        p {
+          color: var(--dimmed-text);
+          font-size: 16px;
+          font-style: italic;
+          margin: 0;
         }
       }
     }

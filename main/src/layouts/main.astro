@@ -1,6 +1,10 @@
 ---
+import { ClientRouter } from "astro:transitions";
+
 import Navbar from "../components/nav.astro";
 import Footer from "../components/footer.astro";
+
+import "@oscarrc/crust/styles.css";
 
 import { Font } from "astro:assets";
 
@@ -9,9 +13,11 @@ import ThirtyTwoXIcon from "../assets/favico/favicon-32x32.png";
 import SixTeenXIcon from "../assets/favico/favicon-16x16.png";
 
 import "../style/colors.css";
+
+const { restrict = false } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" transition:animate="none">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,10 +40,13 @@ import "../style/colors.css";
       });
     </script>
 
+    <script defer src="https://umami.itsmark.dev/recorder.js" data-website-id="cd163751-ffbf-4d63-ae57-a9f6fd5671e3"></script>
+
     <title>readthisshit.fyi</title>
   </head>
   <body>
-    <Navbar />
+    <ClientRouter />
+    <Navbar restrict={restrict} transition:persist />
     <div class="contentContainer">
       <slot class="content" />
     </div>
@@ -52,7 +61,12 @@ import "../style/colors.css";
         allowNestedScroll: true,
       });
 
-      window.__lenis = lenis;
+      (window as any).__lenis = lenis;
+    </script>
+    <script>
+      import { mountToaster } from "@oscarrc/crust/vanilla";
+
+      mountToaster();
     </script>
   </body>
 </html>

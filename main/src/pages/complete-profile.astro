@@ -1,0 +1,25 @@
+---
+import MainLayout from "../layouts/main.astro";
+import ProfileForm from "../components/profileSetupForm.vue";
+---
+
+<MainLayout restrict="true">
+  <div class="titlesNShit">
+    <h1>Hey, welcome and thank you for registering!</h1>
+    <p>To continue you will need to add a nickname to your account. Pick any, it will be visible in your website submissions and reviews</p>
+  </div>
+  <ProfileForm client:only />
+</MainLayout>
+
+<style lang="scss">
+  .titlesNShit {
+    display: flex;
+    flex-direction: column;
+    padding: 75px 24px;
+    max-width: var(--max-content-width);
+
+    p {
+      font-size: 20px;
+    }
+  }
+</style>
