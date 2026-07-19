@@ -32,10 +32,7 @@ function toggleDropdown() {
       <span class="dropdown-icon" :class="{ open: dropdownOpen }"><ArrowDownBoldIcon height="1em" /></span>
     </button>
     <div v-if="dropdownOpen" class="accountInfoDropdown">
-      <div class="userInfo">
-        <p class="label">Account</p>
-        <p class="email">{{ userAccount.data.user?.email }}</p>
-      </div>
+      <a href="/user/settings">Settings</a>
       <hr />
       <button class="logoutButton" @click="logout">Logout</button>
     </div>
@@ -44,11 +41,11 @@ function toggleDropdown() {
   <!-- Logged Out: Login/Register Buttons -->
   <div v-else class="loginAndRegisterButtons">
     <a href="/user/login">Login</a>
-    <a href="/user/login">Register</a>
+    <a href="/user/register">Register</a>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .accountContainer {
   position: relative;
 
@@ -100,33 +97,25 @@ function toggleDropdown() {
     min-width: 200px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-
-    .userInfo {
-      .label {
-        font-size: 12px;
-        color: var(--text);
-        opacity: 0.7;
-        margin: 0 0 4px 0;
-        text-transform: uppercase;
-      }
-
-      .email {
-        font-size: 14px;
-        color: var(--text);
-        margin: 0;
-        word-break: break-all;
-      }
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: auto;
 
     hr {
+      margin: 0;
       border: none;
       height: 2px;
-      background: var(--text);
-      opacity: 0.2;
-      margin: 12px 0;
+      background: var(--dimmed-text-two);
+      width: 100%;
     }
 
-    .logoutButton {
+    button,
+    a {
+      height: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 100%;
       padding: 8px 0;
       background: transparent;

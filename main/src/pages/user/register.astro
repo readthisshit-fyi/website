@@ -1,16 +1,26 @@
 ---
-import UserSettings from "../../components/userSettings.vue";
 import MainLayout from "../../layouts/main.astro";
+import RegisterForm from "../../components/registerForm.vue";
+
+import { m } from "../../paraglide/messages.js";
 ---
 
-<MainLayout>
+<MainLayout class="contentContainer">
   <section class="titlesNStuff">
-    <h1>User settings</h1>
+    <h1>Registration</h1>
   </section>
-  <UserSettings client:only />
+  <section class="loginForm">
+    <RegisterForm client:only />
+  </section>
 </MainLayout>
 
 <style lang="scss">
+  .contentContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   section {
     display: flex;
     align-items: center;
@@ -19,12 +29,16 @@ import MainLayout from "../../layouts/main.astro";
     align-self: center;
   }
 
+  .loginForm {
+    justify-content: start;
+  }
+
   .titlesNStuff {
     display: flex;
     height: auto;
     padding: 70px 0;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     gap: 50px;
 

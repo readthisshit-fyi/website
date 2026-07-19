@@ -151,7 +151,7 @@ async function submitReview() {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .modalContainer {
   width: 100vw;
   height: 100vh;

@@ -59,7 +59,7 @@ document.querySelectorAll(".languageOption").forEach((el) => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .languagePickerWrapper {
   position: relative;
   display: flex;

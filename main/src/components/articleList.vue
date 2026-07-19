@@ -20,7 +20,7 @@ const allArticles = await fetch("http://localhost:3000/articles").then((res) => 
   </Teleport>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .category {
   margin-bottom: 64px;
   width: var(--max-content-width);

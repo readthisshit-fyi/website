@@ -25,7 +25,7 @@ let currentModalJson = ref(null);
   </Teleport>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .wrapper {
   display: flex;
   gap: 40px;

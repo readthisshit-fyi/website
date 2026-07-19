@@ -17,7 +17,7 @@ const props = defineProps(["rating"]);
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .ratingContainer {
   display: flex;
   align-items: center;

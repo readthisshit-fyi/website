@@ -57,7 +57,7 @@ let currentModalJson = ref(null);
   </Teleport>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .pickGrid {
   display: inline-grid;
   width: var(--max-content-width);

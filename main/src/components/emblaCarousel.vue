@@ -51,7 +51,7 @@ const openImage = (src) => {
   </Teleport>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .fullScreenImageContainer {
   position: fixed;
   top: 0;

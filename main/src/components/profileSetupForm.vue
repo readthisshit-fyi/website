@@ -41,7 +41,7 @@ async function submitChanges() {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .form {
   gap: 8px;
   display: flex;

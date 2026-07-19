@@ -20,7 +20,7 @@ function switchTheme() {
   </button>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .hidden {
   display: none;
 }
