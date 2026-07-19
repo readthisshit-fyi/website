@@ -25,8 +25,8 @@ const { restrict } = Astro.props;
       <a href={localizeHref("/contribute")} class="navLink">{m.navbar_contribute()}</a>
       }
 
-      <div class="buttons" transition:persist>
-        {restrict ? null : <NavLoginRegister client:load />}
+      <div class="buttons">
+        {restrict ? null : <NavLoginRegister client:load transition:persist />}
         <ThemeSwitcher client:only />
         <LanguageSwitcher client:only />
       </div>
