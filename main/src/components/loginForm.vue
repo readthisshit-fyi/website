@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { authClient } from "./lib/auth-client";
 import { toast } from "@oscarrc/crust/vanilla";
+import { m } from "../paraglide/messages";
 
 enum modes {
   magicLink = "magicLink",
@@ -20,7 +21,7 @@ function login() {
       },
       {
         onSuccess() {
-          toast.info("Check your email!");
+          toast.info(m.magiclink_sent());
           window.location.href = "/";
         },
       },
@@ -34,11 +35,11 @@ function login() {
       },
       {
         onSuccess() {
-          toast.info("Login successful! Redirecting...");
+          toast.info(m.login_successful());
           window.location.href = "/";
         },
         onError() {
-          toast.error("Login failed!");
+          toast.error(m.login_failed());
         },
       },
     );
@@ -49,26 +50,26 @@ function login() {
 <template>
   <div class="loginForm" v-if="mode == modes.magicLink">
     <div class="inputField">
-      <label for="magicLinkEmail">Email</label>
-      <input type="email" placeholder="email@example.org" name="magicLinkEmail" id="magicLinkEmail" v-model="userEmail" />
+      <label for="magicLinkEmail">{{ m.email() }}</label>
+      <input type="email" :placeholder="m.email_placeholder()" name="magicLinkEmail" id="magicLinkEmail" v-model="userEmail" />
     </div>
     <div class="buttons">
-      <button @click="login">Send magic link</button>
-      <button @click="mode = modes.password" class="altSignin">Signin with password</button>
+      <button @click="login">{{ m.login_magiclink_button() }}</button>
+      <button @click="mode = modes.password" class="altSignin">{{ m.login_with_password() }}</button>
     </div>
   </div>
   <div class="loginForm" v-if="mode == modes.password">
     <div class="inputField">
-      <label for="magicLinkEmail">Email</label>
-      <input type="email" placeholder="email@example.org" name="magicLinkEmail" id="magicLinkEmail" v-model="userEmail" />
+      <label for="magicLinkEmail">{{ m.email() }}</label>
+      <input type="email" :placeholder="m.email_placeholder()" name="magicLinkEmail" id="magicLinkEmail" v-model="userEmail" />
     </div>
     <div class="inputField">
-      <label for="password">Password</label>
-      <input type="password" placeholder="Your password" name="password" id="password" v-model="userPassword" />
+      <label for="password">{{ m.password() }}</label>
+      <input type="password" :placeholder="m.password_placeholder()" name="password" id="password" v-model="userPassword" />
     </div>
     <div class="buttons">
-      <button @click="login">Sign in</button>
-      <button @click="mode = modes.magicLink" class="altSignin">Signin with magic link</button>
+      <button @click="login">{{ m.login_password_button() }}</button>
+      <button @click="mode = modes.magicLink" class="altSignin">{{ m.login_with_magiclink() }}</button>
     </div>
   </div>
 </template>

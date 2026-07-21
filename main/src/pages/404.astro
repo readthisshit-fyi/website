@@ -1,5 +1,6 @@
 ---
 import MainLayout from "../layouts/main.astro";
+import { m } from "../paraglide/messages";
 ---
 
 <MainLayout>
@@ -7,7 +8,7 @@ import MainLayout from "../layouts/main.astro";
     <div class="numberLineText">
       <p class="number">404</p>
       <hr />
-      <h1 class="text">Page not found</h1>
+      <h1 class="text">{m.page_not_found()}</h1>
     </div>
   </section>
 </MainLayout>

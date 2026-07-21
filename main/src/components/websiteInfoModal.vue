@@ -6,6 +6,7 @@ import EmblaCarousel from "./emblaCarousel.vue";
 import { m } from "../paraglide/messages.js";
 import { getLocale } from "../paraglide/runtime.js";
 import { authClient } from "./lib/auth-client";
+import { toast } from "@oscarrc/crust/vanilla";
 
 const props = defineProps(["json"]);
 const card = props.json;
@@ -46,7 +47,7 @@ async function submitReview() {
     reviewText.value = "";
     reviewRating.value = 3;
   } catch (error) {
-    console.error("Error submitting review:", error);
+    toast.error(m.error_submitting_review(), { message: error });
   } finally {
     isSubmittingReview.value = false;
   }
@@ -95,7 +96,7 @@ async function submitReview() {
         <!-- Review Form - Only show if user is logged in -->
         <div v-if="userAccount" class="reviewForm">
           <hr />
-          <p class="formTitle">{{ m.websiteModal_writeReview?.() || "Write a Review" }}</p>
+          <p class="formTitle">{{ m.websiteModal_writeReview() }}</p>
 
           <div class="formGroup">
             <label for="reviewRating">Rating:</label>
@@ -114,25 +115,19 @@ async function submitReview() {
           </div>
 
           <div class="formGroup">
-            <label for="reviewText">Review:</label>
-            <textarea
-              id="reviewText"
-              v-model="reviewText"
-              placeholder="Share your thoughts about this website..."
-              class="reviewTextarea"
-              rows="4"
-            ></textarea>
+            <label for="reviewText">{{ m.review() }}</label>
+            <textarea id="reviewText" v-model="reviewText" :placeholder="m.review_placeholder()" class="reviewTextarea" rows="4"></textarea>
           </div>
 
           <button class="submitButton" @click="submitReview" :disabled="!reviewText.trim() || isSubmittingReview">
-            {{ isSubmittingReview ? "Submitting..." : "Submit Review" }}
+            {{ isSubmittingReview ? m.submitting() : m.submit_review() }}
           </button>
         </div>
 
         <!-- Login prompt - Show if user is NOT logged in -->
         <div v-else class="loginPrompt">
           <hr />
-          <p>{{ m.websiteModal_loginToReview?.() || "Log in to write a review" }}</p>
+          <p>{{ m.websiteModal_loginToReview() }}</p>
         </div>
         <div class="buttons">
           <button>

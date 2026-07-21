@@ -2,12 +2,13 @@
 import { ref } from "vue";
 import { authClient } from "./lib/auth-client";
 import { toast } from "@oscarrc/crust/vanilla";
+import { m } from "../paraglide/messages";
 
 const userNickname = ref("");
 
 async function submitChanges() {
   if (userNickname.value.trim() === "") {
-    console.log("The username is empty!");
+    toast.error(m.empty_nickname());
     return;
   }
 
@@ -17,14 +18,14 @@ async function submitChanges() {
     },
     {
       onRequest() {
-        toast.loading("Saving nickname...");
+        toast.loading(m.saving_nickname());
       },
       onSuccess() {
-        toast.info("Nickname saved successfully!");
+        toast.info(m.nickname_saved());
         window.location.href = "/";
       },
       onError() {
-        toast.error("Nickname change failed! Please try again later or contact the admin");
+        toast.error(m.nickname_save_failed_title(), { message: m.nickname_save_failed() });
       },
     },
   );
@@ -34,10 +35,10 @@ async function submitChanges() {
 <template>
   <div class="form">
     <div class="field">
-      <label for="nicknameInputField">Nickname</label>
+      <label for="nicknameInputField">{{ m.nickname() }}</label>
       <input type="text" id="nicknameInputField" v-model="userNickname" placeholder="Your nickname" />
     </div>
-    <button @click="submitChanges()">Apply changes!</button>
+    <button @click="submitChanges()">{{ m.apply_changes() }}</button>
   </div>
 </template>
 

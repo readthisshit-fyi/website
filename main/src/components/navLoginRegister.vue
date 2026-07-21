@@ -3,6 +3,7 @@ import { ref, onMounted } from "vue";
 import { authClient } from "./lib/auth-client";
 import ArrowDownBoldIcon from "@iconify-vue/ep/arrow-down-bold";
 import { toast } from "@oscarrc/crust/vanilla";
+import { m } from "../paraglide/messages";
 
 const userAccount = ref(null);
 const dropdownOpen = ref(false);
@@ -14,7 +15,7 @@ onMounted(async () => {
 
 async function logout() {
   await authClient.signOut();
-  toast.info("You have been logged out.");
+  toast.info(m.logged_out());
   userAccount.value = null;
   dropdownOpen.value = false;
 }
@@ -32,16 +33,16 @@ function toggleDropdown() {
       <span class="dropdown-icon" :class="{ open: dropdownOpen }"><ArrowDownBoldIcon height="1em" /></span>
     </button>
     <div v-if="dropdownOpen" class="accountInfoDropdown">
-      <a href="/user/settings">Settings</a>
+      <a href="/user/settings">{{ m.settings() }}</a>
       <hr />
-      <button class="logoutButton" @click="logout">Logout</button>
+      <button class="logoutButton" @click="logout">{{ m.logout() }}</button>
     </div>
   </div>
 
   <!-- Logged Out: Login/Register Buttons -->
   <div v-else class="loginAndRegisterButtons">
-    <a href="/user/login">Login</a>
-    <a href="/user/register">Register</a>
+    <a href="/user/login">{{ m.login() }}</a>
+    <a href="/user/register">{{ m.register() }}</a>
   </div>
 </template>
 

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { m } from "../paraglide/messages";
 import { ref } from "vue";
 import { authClient } from "./lib/auth-client";
 import { toast } from "@oscarrc/crust/vanilla";
@@ -16,11 +17,11 @@ function registerUser() {
     },
     {
       onSuccess() {
-        toast.info("Registration successful!");
+        toast.info(m.registration_successful());
         window.location.href = "/user/login";
       },
       onError() {
-        toast.error("When registering an error has occured...");
+        toast.error(m.registration_error());
       },
     },
   );
@@ -30,22 +31,22 @@ function registerUser() {
 <template>
   <div class="form">
     <div class="inputField">
-      <label for="userName">Nickname</label>
-      <input type="text" placeholder="nickname" name="userName" id="userName" v-model="userName" />
+      <label for="userName">{{ m.nickname() }}</label>
+      <input type="text" :placeholder="m.nickname_placeholder()" name="userName" id="userName" v-model="userName" />
     </div>
     <div class="inputField">
-      <label for="userEmail">Email</label>
-      <input type="email" placeholder="email@example.org" name="userEmail" id="userEmail" v-model="userEmail" />
+      <label for="userEmail">{{ m.email() }}</label>
+      <input type="email" :placeholder="m.email_placeholder()" name="userEmail" id="userEmail" v-model="userEmail" />
     </div>
     <div class="inputField">
-      <label for="userPassword">Password</label>
-      <input type="password" placeholder="password" name="userPassword" id="userPassword" v-model="userPassword" />
+      <label for="userPassword">{{ m.password() }}</label>
+      <input type="password" :placeholder="m.password_placeholder()" name="userPassword" id="userPassword" v-model="userPassword" />
     </div>
     <p class="acceptance">
-      By registering on the website you accept the <a href="/legal/terms">Terms of service</a> and
-      <a href="/legal/privacy">Privacy policy</a>
+      {{ m.acceptance_first_part() }} <a href="/legal/terms">{{ m.terms_of_service() }}</a> {{ m.acceptance_and() }}
+      <a href="/legal/privacy">{{ m.privacy_policy() }}</a>
     </p>
-    <button @click="registerUser">Sign up</button>
+    <button @click="registerUser">{{ m.registration_button() }}</button>
   </div>
 </template>
 

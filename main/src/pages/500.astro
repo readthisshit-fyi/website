@@ -1,7 +1,8 @@
 ---
 import MainLayout from "../layouts/main.astro";
+import { m } from "../paraglide/messages";
 ---
 
 <MainLayout>
-  <h1>500 A rat just fell inside the server...</h1>
+  <h1>500 {m.server_error()}</h1>
 </MainLayout>

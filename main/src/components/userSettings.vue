@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { authClient } from "./lib/auth-client";
 import { toast } from "@oscarrc/crust/vanilla";
+import { m } from "../paraglide/messages";
 
 const userHasPassword = authClient;
 
@@ -18,7 +19,7 @@ function clearFields() {
 }
 
 async function saveUserSettings() {
-  let loadingToast = toast.loading("Saving settings..");
+  let loadingToast = toast.loading(m.saving_settings());
 
   if (newUserEmail.value !== "") {
     await authClient.changeEmail(
@@ -27,10 +28,10 @@ async function saveUserSettings() {
       },
       {
         onSuccess() {
-          toast.success("New saved!", { message: "Check your new email and the spam folder." });
+          toast.success(m.email_saved(), { message: m.check_inbox() });
         },
         onError() {
-          toast.error("Failed to save the email...");
+          toast.error(m.email_save_failed());
         },
       },
     );
@@ -45,10 +46,10 @@ async function saveUserSettings() {
       },
       {
         onSuccess() {
-          toast.success("Password changed successfully!");
+          toast.success(m.password_change_success());
         },
         onError() {
-          toast.error("Failed to save the password...");
+          toast.error(m.password_change_failed());
         },
       },
     );
@@ -61,17 +62,17 @@ async function saveUserSettings() {
       },
       {
         onSuccess() {
-          toast.success("Your nickname has been changed!");
+          toast.success(m.nickname_saved());
         },
         onError() {
-          toast.error("Failed to save your nickname.");
+          toast.error(m.nickname_save_failed());
         },
       },
     );
   }
 
   toast.update(loadingToast, {
-    title: "Changes saved!",
+    title: m.changes_saved(),
     type: "success",
   });
 
@@ -82,34 +83,34 @@ async function saveUserSettings() {
 <template>
   <div class="settingsWrapper">
     <div class="settingsGroup">
-      <h2>Account settings</h2>
+      <h2>{{ m.account_settings() }}</h2>
       <div class="inputGroup">
-        <label for="userNickname">Nickname</label>
-        <input type="text" id="userNickname" v-model="newUserNickname" placeholder="Nickname" />
+        <label for="userNickname">{{ m.nickname() }}</label>
+        <input type="text" id="userNickname" v-model="newUserNickname" :placeholder="m.nickname_placeholder()" />
       </div>
     </div>
 
     <div class="settingsGroup">
-      <h2>Login settings</h2>
-      <p>For the following fields you can leave them empty if you dont want to change anything</p>
+      <h2>{{ m.login_settings() }}</h2>
+      <p>{{ m.login_settings_desc() }}</p>
       <div class="inputGroup">
-        <label for="userPassword">New Email</label>
-        <input type="email" id="userPassword" v-model="newUserEmail" placeholder="New email" />
+        <label for="userPassword">{{ m.new_email() }}</label>
+        <input type="email" id="userPassword" v-model="newUserEmail" :placeholder="m.email_placeholder()" />
       </div>
 
       <hr />
 
       <div class="inputGroup">
-        <label for="userPassword">Old password</label>
-        <input type="password" id="userPassword" v-model="oldUserPassword" placeholder="Old password" />
+        <label for="userPassword">{{ m.old_password() }}</label>
+        <input type="password" id="userPassword" v-model="oldUserPassword" :placeholder="m.old_password_placeholder()" />
       </div>
       <div class="inputGroup">
-        <label for="userPassword">New password</label>
-        <input type="password" id="userPassword" v-model="newUserPassword" placeholder="New password" />
+        <label for="userPassword">{{ m.new_password() }}</label>
+        <input type="password" id="userPassword" v-model="newUserPassword" :placeholder="m.new_password_placeholder()" />
       </div>
     </div>
 
-    <button @click="saveUserSettings()">Save settings</button>
+    <button @click="saveUserSettings()">{{ m.save_settings() }}</button>
   </div>
 </template>
 

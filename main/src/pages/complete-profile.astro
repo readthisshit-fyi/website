@@ -1,12 +1,13 @@
 ---
 import MainLayout from "../layouts/main.astro";
 import ProfileForm from "../components/profileSetupForm.vue";
+import { m } from "../paraglide/messages";
 ---
 
 <MainLayout restrict="true">
   <div class="titlesNShit">
-    <h1>Hey, welcome and thank you for registering!</h1>
-    <p>To continue you will need to add a nickname to your account. Pick any, it will be visible in your website submissions and reviews</p>
+    <h1>{m.thank_you_for_registering()}</h1>
+    <p>{m.thank_you_for_registering_desc()}</p>
   </div>
   <ProfileForm client:only />
 </MainLayout>

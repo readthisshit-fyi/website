@@ -1,11 +1,12 @@
 ---
 import UserSettings from "../../components/userSettings.vue";
 import MainLayout from "../../layouts/main.astro";
+import { m } from "../../paraglide/messages";
 ---
 
 <MainLayout>
   <section class="titlesNStuff">
-    <h1>User settings</h1>
+    <h1>{m.user_settings()}</h1>
   </section>
   <UserSettings client:only />
 </MainLayout>

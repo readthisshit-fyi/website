@@ -1,16 +1,17 @@
 ---
 import MouseSvg from "../assets/mouse.svg";
+import { m } from "../paraglide/messages";
 ---
 
 <MouseSvg class="mouseSvg" />
 <div class="footer">
   <div class="footerContainer">
     <section>
-      <p>Legal stuff</p>
-      <a href="/legal/terms">Terms of Service</a>
-      <a href="/legal/privacy">Privacy Policy</a>
-      <a href="/legal/cookies">Cookies</a>
-      <a href="/legal/rules">Rules</a>
+      <p>{m.legal_stuff()}</p>
+      <a href="/legal/terms">{m.terms_of_service()}</a>
+      <a href="/legal/privacy">{m.privacy_policy()}</a>
+      <a href="/legal/cookies">{m.cookies()}</a>
+      <a href="/legal/rules">{m.rules()}</a>
     </section>
   </div>
 </div>
