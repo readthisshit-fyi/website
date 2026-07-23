@@ -1,5 +1,6 @@
 ---
 import MainLayout from "../layouts/main.astro";
+import WebsiteRequestForm from "../components/websiteRequestForm.vue";
 
 import { m } from "../paraglide/messages.js";
 ---
@@ -13,17 +14,7 @@ import { m } from "../paraglide/messages.js";
       <h2>{m.contribute_suggestion_title()}</h2>
       <p>{m.contribute_suggestion_subtitle()}</p>
     </div>
-    <form action="/api/submitwebsite" method="post" class="websiteForm">
-      <div class="inputField">
-        <label for="websiteUrl">{m.contribute_suggestion_form_websiteUrl()}</label>
-        <input type="text" name="websiteUrl" id="websiteUrl" placeholder={m.contribute_suggestion_form_websiteUrl_placeholder()} />
-      </div>
-      <div class="inputField">
-        <label for="reason">{m.contribute_suggestion_form_opinion()}</label>
-        <textarea name="reason" rows="4" id="reason" placeholder={m.contribute_suggestion_form_opinion_placeholder()}></textarea>
-      </div>
-      <input type="submit" value={m.contribute_suggestion_form_submit()} />
-    </form>
+    <WebsiteRequestForm client:only />
   </section>
   <section>
     <div class="subtitlesNStuff">
@@ -65,32 +56,6 @@ import { m } from "../paraglide/messages.js";
       gap: 5px;
       display: flex;
       flex-direction: column;
-    }
-
-    .websiteForm {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      width: 50%;
-
-      .inputField {
-        display: flex;
-        flex-direction: column;
-
-        input,
-        textarea {
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          gap: 2px;
-          background: var(--background);
-          border: var(--text) 2px solid;
-          padding: 6px;
-          border-radius: 4px;
-          color: var(--text);
-          resize: none;
-        }
-      }
     }
 
     a,
