@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { computed, ref, onMounted } from "vue";
 import { authClient } from "./lib/auth-client";
 import ArrowDownBoldIcon from "@iconify-vue/ep/arrow-down-bold";
 import { toast } from "@oscarrc/crust/vanilla";
@@ -7,6 +7,7 @@ import { m } from "../paraglide/messages";
 
 const userAccount = ref(null);
 const dropdownOpen = ref(false);
+const currentUser = computed(() => userAccount.value?.data?.user ?? null);
 
 onMounted(async () => {
   const session = await authClient.getSession();
@@ -27,9 +28,9 @@ function toggleDropdown() {
 
 <template>
   <!-- Logged In: Account Dropdown -->
-  <div v-if="userAccount" class="accountContainer">
+  <div v-if="currentUser" class="accountContainer">
     <button class="accountButton" @click="toggleDropdown">
-      <span class="userName">{{ userAccount.data.user?.name }}</span>
+      <span class="userName">{{ currentUser.name }}</span>
       <span class="dropdown-icon" :class="{ open: dropdownOpen }"><ArrowDownBoldIcon height="1em" /></span>
     </button>
     <div v-if="dropdownOpen" class="accountInfoDropdown">

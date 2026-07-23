@@ -26,7 +26,7 @@ const { restrict } = Astro.props;
       }
 
       <div class="buttons">
-        {restrict ? null : <NavLoginRegister client:load transition:persist />}
+        {restrict ? null : <NavLoginRegister client:load />}
         <ThemeSwitcher client:only />
         <LanguageSwitcher client:only />
       </div>
